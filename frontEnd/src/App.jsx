@@ -1,79 +1,17 @@
-import { useState } from "react";
+import { Routes, Route } from "react-router";
+import MainLayout from "./layout/MainLayout";
 
 const App = () => {
-  const [dates, setDates] = useState({
-    dia: "",
-    hora: "",
-    cliente: "",
-    email: "",
-  });
-
-  const capturarDatos = (e) => {
-    setDates({
-      ...dates,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(dates);
-
-    await fetch("/email/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dates),
-    });
-  };
-
   return (
-    <>
-      <div>
-        <form className="flex flex-col items-start p-5 gap-2">
-          <input
-            onChange={(e) => {
-              capturarDatos(e);
-            }}
-            type="text"
-            name="dia"
-            placeholder="Día"
-            required
-          />
-          <input
-            onChange={(e) => {
-              capturarDatos(e);
-            }}
-            type="time"
-            name="hora"
-            placeholder="Hora"
-            required
-          />
-          <input
-            onChange={(e) => {
-              capturarDatos(e);
-            }}
-            type="text"
-            name="cliente"
-            placeholder="Nombre del cliente"
-            required
-          />
-          <input
-            onChange={(e) => {
-              capturarDatos(e);
-            }}
-            type="email"
-            name="email"
-            placeholder="email"
-            required
-          />
-          <button onClick={handleSubmit} type="submit">
-            Tomar turno
-          </button>
-        </form>
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<MainLayout />} />
+      <Route path="/services" element={<h1>Services</h1>} />
+      <Route path="/turnos" element={<h1>Turnos</h1>} />
+      <Route path="/about" element={<h1>About</h1>} />
+      <Route path="/contact" element={<h1>Contact</h1>} />
+      <Route path="/login" element={<h1>Login</h1>} />
+      <Route path="/*" element={<h1>not Found</h1>} />
+    </Routes>
   );
 };
 
