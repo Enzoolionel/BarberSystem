@@ -3,11 +3,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import router from "./routes/turnos.routes.js";
+import { connectDB } from "./conectDB.js";
 
 const app = express();
 app.use(express.json());
+app.use(express.static("./dist"));
+connectDB();
 
-const { PORT } = process.env;
+const { PORT } = process.env || 3000;
 
 app.use("/email", router);
 

@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    background-color: #202020;
+    color: #d1d1d1;
+}
+
+button{
+    border: 1px solid #d1d1d1;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+input{
+    color: #000000;
+    padding: 2px;
+}
