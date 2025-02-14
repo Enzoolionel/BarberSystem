@@ -1,80 +1,133 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const Form = () => {
-  const [dates, setDates] = useState({
+const TurnosForm = () => {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    telefono: "",
     dia: "",
     hora: "",
-    cliente: "",
-    email: "",
   });
 
-  const capturarDatos = (e) => {
-    setDates({
-      ...dates,
-      [e.target.name]: e.target.value,
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(dates);
-
-    await fetch("/email/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dates),
-    });
+    console.log("Formulario enviado:", formData);
+    // Aquí podrías añadir la lógica para enviar los datos al backend
   };
 
   return (
-    <>
-      <div>
-        <form className="flex flex-col items-start p-5 gap-2">
+    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
+      <h2 className="text-2xl font-semibold text-center mb-6">
+        Formulario de Turno
+      </h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="nombre"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Nombre
+          </label>
           <input
-            onChange={(e) => {
-              capturarDatos(e);
-            }}
             type="text"
-            name="dia"
-            placeholder="Día"
+            id="nombre"
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+            className="w-full p-3 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Email
+          </label>
           <input
-            onChange={(e) => {
-              capturarDatos(e);
-            }}
-            type="time"
-            name="hora"
-            placeholder="Hora"
-            required
-          />
-          <input
-            onChange={(e) => {
-              capturarDatos(e);
-            }}
-            type="text"
-            name="cliente"
-            placeholder="Nombre del cliente"
-            required
-          />
-          <input
-            onChange={(e) => {
-              capturarDatos(e);
-            }}
             type="email"
+            id="email"
             name="email"
-            placeholder="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-3 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
-          <button onClick={handleSubmit} type="submit">
-            Tomar turno
-          </button>
-        </form>
-      </div>
-    </>
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="telefono"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Teléfono
+          </label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleChange}
+            className="w-full p-3 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="dia"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Día
+          </label>
+          <input
+            type="date"
+            id="dia"
+            name="dia"
+            value={formData.dia}
+            onChange={handleChange}
+            className="w-full p-3 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="hora"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Hora
+          </label>
+          <input
+            type="time"
+            id="hora"
+            name="hora"
+            value={formData.hora}
+            onChange={handleChange}
+            className="w-full p-3 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full p-3 mt-6 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Agendar Turno
+        </button>
+      </form>
+    </div>
   );
 };
 
-export default Form;
+export default TurnosForm;

@@ -1,17 +1,41 @@
 import { Routes, Route } from "react-router";
-import MainLayout from "./layout/MainLayout";
+import { useEffect, useState } from "react";
+
+import NavBar from "./components/NavBar";
+
+import Home from "./pages/Home";
+import Services from "./pages/Services";
+import Turnos from "./pages/Turnos";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Login from "./pages/Login";
 
 const App = () => {
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("darkMode") === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
   return (
-    <Routes>
-      <Route path="/" element={<MainLayout />} />
-      <Route path="/services" element={<h1>Services</h1>} />
-      <Route path="/turnos" element={<h1>Turnos</h1>} />
-      <Route path="/about" element={<h1>About</h1>} />
-      <Route path="/contact" element={<h1>Contact</h1>} />
-      <Route path="/login" element={<h1>Login</h1>} />
-      <Route path="/*" element={<h1>not Found</h1>} />
-    </Routes>
+    <>
+      <div className={`${darkMode ? "dark" : ""}`}>
+        <NavBar
+          darkMode={darkMode}
+          toggleDarkMode={() => setDarkMode(!darkMode)}
+        />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/turnos" element={<Turnos />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </>
   );
 };
 
