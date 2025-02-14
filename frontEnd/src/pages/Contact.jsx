@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 const ContactForm = () => {
   return (
     <Layout title="Contáctanos">
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4 ">
         {/* Nombre */}
         <div>
           <label className="block text-gray-700 dark:text-gray-300 font-medium">

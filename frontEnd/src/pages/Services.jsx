@@ -1,62 +1,86 @@
+import { motion } from "framer-motion";
 import Layout from "../components/Layout";
+import ServiceCard from "@components/ServiceCard";
+
+import icon1 from "@icon/icon1.png";
+import icon2 from "@icon/icon2.png";
+import icon3 from "@icon/icon3.png";
+import icon4 from "@icon/icon4.png";
+import icon5 from "@icon/icon5.png";
 
 const services = [
   {
     id: 1,
-    title: "Electricista",
-    description:
-      "Servicios de reparación y mantenimiento eléctrico. Instalaciones de sistemas eléctricos en viviendas y empresas.",
-    icon: "⚡",
+    title: "Corte de pelo",
+    description: "Estilo preciso y personalizado para cada cliente.",
+    icon: icon3,
   },
-
   {
     id: 2,
-    title: "Plomería",
-    description:
-      "Reparación de fugas, instalación de tuberías, mantenimiento y más.",
-    icon: "💧",
+    title: "Afeitado",
+    description: "Afeitado al ras con acabado profesional.",
+    icon: icon1,
   },
   {
     id: 3,
-    title: "Pintura",
-    description:
-      "Servicios de pintura interior y exterior, con una variedad de acabados.",
-    icon: "🎨",
+    title: "Recorte de barba",
+    description: "Define y estiliza tu barba con precisión.",
+    icon: icon2,
   },
   {
     id: 4,
-    title: "Jardinería",
-    description: "Mantenimiento de jardines, podas, siembra y más.",
-    icon: "🌿",
+    title: "Coloración del cabello",
+    description: "Cambia tu look con tintes de calidad.",
+    icon: icon4,
+  },
+  {
+    id: 5,
+    title: "Corte de pelo para niños",
+    description: "Cortes cómodos y modernos para los pequeños.",
+    icon: icon5,
+  },
+  {
+    id: 6,
+    title: "Corte de pelo para niños",
+    description: "Cortes cómodos y modernos para los pequeños.",
+    icon: icon5,
   },
 ];
 
-const ServiceCard = ({ service }) => (
-  <div className="max-w-xs w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden group hover:shadow-2xl transition duration-300 ease-in-out">
-    <div className="relative p-6 flex flex-col items-center">
-      <div className="text-4xl mb-4">{service.icon}</div>
-      <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
-        {service.title}
-      </h3>
-      <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-        {service.description}
-      </p>
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-300 ease-in-out"></div>
-    </div>
-    <div className="p-4 bg-blue-600 text-white text-center rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-      <button className="py-2 px-4 bg-white text-blue-600 font-semibold rounded-full shadow-md hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600">
-        Más Información
-      </button>
-    </div>
-  </div>
-);
-
 const Services = () => (
-  <Layout title="Services" className="flex flex-wrap justify-center gap-6">
-    {services.map((service) => (
-      <ServiceCard key={service.id} service={service} />
-    ))}
-  </Layout>
+  <motion.section
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1 }}
+    className="h-screen w-screen flex flex-col justify-center items-center bg-[url('/public/img/fondoService.jpg')] bg-blend-multiply dark:bg-slate-500"
+  >
+    <motion.h1
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="text-slate-300 mb-10 text-5xl font-bold"
+    >
+      Servicio de barbería
+    </motion.h1>
+
+    <div className="w-[70%] flex flex-wrap gap-10">
+      {services.map((service, index) => (
+        <motion.div
+          key={service.id}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
+          viewport={{ once: false, amount: 0.3 }}
+        >
+          <ServiceCard
+            icon={service.icon}
+            title={service.title}
+            description={service.description}
+          />
+        </motion.div>
+      ))}
+    </div>
+  </motion.section>
 );
 
 export default Services;

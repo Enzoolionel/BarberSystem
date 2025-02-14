@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 const Login = () => {
   return (
     <Layout title="Iniciar Sesión">
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4 ">
         {/* Email */}
         <div>
           <label className="block text-gray-700 dark:text-gray-300 font-medium">

@@ -5,11 +5,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primario: "#242038",
-        secundario: "#8D86C9",
-        detalle: "#EF8354",
-        fondo: "#F4F1DE",
-        texto: "#2E2E2E",
+        primario: "#1A1A1D", // Negro profundo (elegante y moderno)
+        secundario: "#C5A880", // Beige dorado (calidez y sofisticación)
+        detalle: "#D64933", // Rojo terracota (llamativo y energético)
+        fondo: "#F5F5F5", // Gris claro (neutral y limpio)
+        texto: "#333333", // Gris oscuro (legible y profesional)
       },
     },
   },
