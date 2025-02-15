@@ -3,7 +3,7 @@ const ServiceCard = ({ icon, title, description }) => {
     <div className="xl:w-96 h-64 bg-white dark:bg-secundario shadow-lg rounded-lg overflow-hidden group hover:shadow-2xl transition duration-300 ease-in-out">
       <div className="relative p-6 flex flex-col items-center">
         <img className="text-4xl mb-4 h-14" src={icon} alt="Icono" />
-        <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center">
           {title}
         </h3>
         <p className="text-sm dark:text-gray-700 mt-2">{description}</p>

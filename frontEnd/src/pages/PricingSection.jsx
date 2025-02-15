@@ -45,7 +45,7 @@ const precios = [
 ];
 const PricingSection = () => {
   return (
-    <section className="flex flex-col justify-center items-center dark:bg-gray-800 py-16 px-6 sm:px-12 md:px-20 text-center">
+    <section className="flex flex-col  dark:bg-gray-800 py-16 px-2 sm:px-12 md:px-20 text-center">
       <h1 className="text-5xl font-bold text-gray-800 dark:text-white mb-16">
         Nuestros precios
       </h1>
@@ -54,7 +54,7 @@ const PricingSection = () => {
         whileInView={{ x: 0, opacity: 1 }}
         viewport={{ once: false }} // Permite que la animación se repita
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-[80%] flex flex-wrap gap-5 justify-center"
+        className="w-[80%] flex xl:flex-row justify-center flex-col flex-wrap gap-5 content-center lg:content-normal self-center"
       >
         {precios.map((item, index) => (
           <PriceDescription

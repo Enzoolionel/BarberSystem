@@ -39,12 +39,6 @@ const services = [
     description: "Cortes cómodos y modernos para los pequeños.",
     icon: icon5,
   },
-  {
-    id: 6,
-    title: "Corte de pelo para niños",
-    description: "Cortes cómodos y modernos para los pequeños.",
-    icon: icon5,
-  },
 ];
 
 const Services = () => (
@@ -52,13 +46,13 @@ const Services = () => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 1 }}
-    className="h-screen w-screen flex flex-col justify-center items-center bg-[url('/public/img/fondoService.jpg')] bg-blend-multiply dark:bg-slate-500"
+    className="h-full w-screen flex flex-col py-5 items-center bg-[url('/public/img/fondoService.jpg')] bg-blend-multiply dark:bg-slate-500"
   >
     <motion.h1
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="text-slate-300 mb-10 text-5xl font-bold"
+      className="text-slate-300 mb-10 text-center text-5xl font-bold"
     >
       Servicio de barbería
     </motion.h1>

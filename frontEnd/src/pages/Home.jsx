@@ -7,13 +7,13 @@ import Footer from "../components/Footer";
 
 const Home = () => {
   return (
-    <>
+    <main className="overflow-x-hidden">
       <PrincipalPage />
       <Working />
       <Services />
       <PricingSection />
       <Footer />
-    </>
+    </main>
   );
 };
 

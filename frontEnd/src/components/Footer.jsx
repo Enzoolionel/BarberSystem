@@ -9,7 +9,7 @@ import twitterIcon from "@icon/twitterIcon.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-12">
+    <footer className=" bg-black text-white py-12">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center md:flex-row justify-between">
           {/* Logo */}
@@ -17,12 +17,12 @@ const Footer = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col justify-center mb-8 md:mb-0"
+            className="flex flex-col items-center justify-center mb-8 md:mb-0"
           >
             <img src={logo} alt="Logo de la barbería" className="w-32" />
             <Button
               to="/turnos"
-              className="mt-6 px-6 py-3 hover:scale-105 relative right-3 bg-secundario font-semibold rounded-lg hover:brightness-125 transition"
+              className="mt-6 px-6 py-3 hover:scale-105 bg-secundario font-semibold rounded-lg hover:brightness-125 transition"
             >
               Reservar turno
             </Button>
@@ -80,8 +80,10 @@ const Footer = () => {
           </p>
           <p className="mt-16">
             By:
-            <a href="https://www.instagram.com/_enzoolionel/"> _EnzooLionel </a>
-            😎
+            <a href="https://www.instagram.com/_enzoolionel/">
+              {" "}
+              _EnzooLionel ✅
+            </a>
           </p>
         </div>
       </div>
