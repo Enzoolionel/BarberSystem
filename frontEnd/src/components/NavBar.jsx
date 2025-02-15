@@ -25,19 +25,11 @@ const NavBar = ({ darkMode, toggleDarkMode }) => {
   return (
     <nav
       className={`w-full fixed z-40 top-0 left-0 right-0 py-4 transition-all duration-300 ${
-        scrolling
-          ? "bg-gray-100 dark:bg-gray-900 shadow-md"
-          : "bg-transparent dark:bg-transparent shadow-none"
+        scrolling ? "dark:bg-gray-800 shadow-md" : "shadow-none"
       }`}
     >
       <div className="container mx-auto flex justify-between items-center px-6">
-        <img
-          src={logo}
-          alt="Logo"
-          className={`rounded-full h-32 ${
-            darkMode ? "bg-transparent" : "bg-gray-900"
-          }`}
-        />
+        <img src={logo} alt="Logo" className={`rounded-full h-32`} />
         <ul className="flex space-x-6 gap-5 text-lg">
           {["/", "/turnos", "/about", "/contact", "/login"].map(
             (path, index) => {

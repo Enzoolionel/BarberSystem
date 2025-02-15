@@ -24,7 +24,7 @@ const PrincipalPage = () => {
         </p>
         <Button
           to="/turnos"
-          className="mt-6 px-6 py-3 bg-secundario text-white font-semibold rounded-lg hover:brightness-125 transition"
+          className="mt-6 px-6 py-3 hover:scale-105 bg-secundario font-semibold rounded-lg hover:brightness-125 transition"
         >
           Reservar turno
         </Button>

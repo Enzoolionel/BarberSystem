@@ -63,7 +63,7 @@ const Services = () => (
       Servicio de barbería
     </motion.h1>
 
-    <div className="w-[70%] flex flex-wrap gap-10">
+    <div className="w-[70%] flex flex-wrap justify-center gap-10">
       {services.map((service, index) => (
         <motion.div
           key={service.id}
