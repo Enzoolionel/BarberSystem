@@ -1,8 +1,15 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const { DB_URI } = process.env;
 
 export const connectDB = () => {
-  mongoose
-    .connect("mongodb://127.0.0.1:27017/turnos")
-    .catch((error) => console.log(error));
-  console.log("MongoDB connected");
+  try {
+    mongoose.connect(DB_URI).catch((error) => console.log(error));
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.log(error);
+  }
 };
