@@ -5,11 +5,22 @@ dotenv.config();
 
 const { DB_URI } = process.env;
 
-export const connectDB = () => {
+export const connectDB = async () => {
   try {
-    mongoose.connect(DB_URI).catch((error) => console.log(error));
-    console.log("MongoDB connected");
+    if (!DB_URI) {
+      throw new Error(
+        "Error: DB_URI no está definida en las variables de entorno."
+      );
+    }
+
+    await mongoose.connect(DB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("✅ MongoDB conectado exitosamente");
   } catch (error) {
-    console.log(error);
+    console.error("❌ Error al conectar con MongoDB:", error.message);
+    process.exit(1); // Detiene el servidor si la conexión falla
   }
 };

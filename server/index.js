@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://barbersystem.onrender.com/turnos", // Reemplaza con el dominio de tu aplicación
+    origin: "https://barbersystem.onrender.com", // Reemplaza con el dominio de tu aplicación
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
