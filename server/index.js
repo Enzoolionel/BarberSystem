@@ -18,6 +18,10 @@ const { PORT } = process.env || 3000;
 app.use("/api", router);
 app.use("/email", router);
 
+app.use("*", (req, res) => {
+  res.sendFile("build", "index.html");
+});
+
 app.use((req, res) => {
   res.status(404).send("<h1>404</h1>");
 });
