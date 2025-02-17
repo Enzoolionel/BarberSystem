@@ -43,7 +43,7 @@ export const addTurno = async (req, res) => {
       text,
     });
 
-    res.status(200).json({ message: "Turno agregado correctamente" });
+    return res.status(200).json({ message: "Turno agregado correctamente" });
   } catch (err) {
     console.log(err);
   }
