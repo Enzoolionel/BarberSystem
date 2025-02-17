@@ -13,10 +13,7 @@ export const connectDB = async () => {
       );
     }
 
-    await mongoose.connect(DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(DB_URI);
 
     console.log("✅ MongoDB conectado exitosamente");
   } catch (error) {
