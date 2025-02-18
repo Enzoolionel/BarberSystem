@@ -8,4 +8,4 @@ const turnSchema = new mongoose.Schema({
   cliente: String,
 });
 
-export const Turn = mongoose.model("Turn", turnSchema);
+export const Turn = mongoose.model("Turn", turnSchema, "turnos");

@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { addTurno, getAllTurns } from "../controllers/turnos.controller.js";
 
-const router = Router();
+const turnosRouter = Router();
 
-router.get("/turnos", getAllTurns);
-router.post("/turnos", addTurno);
+turnosRouter.get("/turnos", getAllTurns);
+turnosRouter.post("/turnos", addTurno);
 
 // router.post("/send", sendMail);
 
-export default router;
+export default turnosRouter;

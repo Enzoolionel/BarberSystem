@@ -36,8 +36,6 @@ export const addTurno = async (req, res) => {
     const turn = new Turn({ dia, hora, cliente, email, telefono });
     await turn.save();
 
-    res.status(200).json({ message: "Turno agregado correctamente" });
-
     await transporter
       .sendMail({
         from: EMAIL_USER,
@@ -48,8 +46,7 @@ export const addTurno = async (req, res) => {
       .then(() => {
         console.log("Correo enviado correctamente");
       });
-
-    return;
+    return res.status(200).json({ message: "Turno agregado correctamente" });
   } catch (err) {
     console.log(err);
   }

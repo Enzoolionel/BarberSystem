@@ -6,7 +6,8 @@ import { fileURLToPath } from "url"; // Necesario para usar __dirname en ES Modu
 
 dotenv.config();
 
-import router from "./routes/turnos.routes.js";
+import turnosRouter from "./routes/turnos.routes.js";
+import barberosRouter from "./routes/barberos.routes.js";
 import { connectDB } from "./conectDB.js";
 
 const app = express();
@@ -32,8 +33,8 @@ app.use(express.static(path.join(__dirname, "dist")));
 connectDB();
 
 // Rutas de la API
-app.use("/api", router);
-app.use("/email", router);
+app.use("/api", turnosRouter);
+app.use("/api", barberosRouter);
 
 // Para todas las demás rutas, sirve el archivo index.html
 app.get("*", (req, res) => {
