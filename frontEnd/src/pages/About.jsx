@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Layout from "../components/Layout";
+import logo from "/img/newLogo1.png";
 
 const About = () => {
   return (
@@ -17,7 +18,7 @@ const About = () => {
           className="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden shadow-lg border-4 border-red-600 dark:border-yellow-500"
         >
           <img
-            src="#"
+            src={logo}
             alt="Barbería en acción"
             className="w-full h-full object-cover"
           />
@@ -44,7 +45,7 @@ const About = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="mt-4 text-gray-700 dark:text-gray-300"
           >
-            En{" "}
+            En
             <span className="font-semibold text-red-700 dark:text-yellow-400">
               Barbería Elite
             </span>

@@ -1,8 +1,14 @@
 import axios from "axios";
 const baseUrl = "http://localhost:3000/api/turnos";
 
-export const getAllTurno = () => {
-  return axios.get(baseUrl);
+export const getAllTurno = (token) => {
+  return axios.get(baseUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+    withCredentials: true, // ✅ Asegurar que se envían las cookies de autenticación
+  });
 };
 
 export const createTurno = (newObject) => {

@@ -9,6 +9,9 @@ import Turnos from "./pages/Turnos";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -19,13 +22,24 @@ const App = () => {
     localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
 
+  useEffect(() => {
+    const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const color = darkMode ? "#121212" : "#ffffff";
+    document
+      .querySelector("meta[name=theme-color]")
+      .setAttribute("content", color);
+  }, []);
+
   return (
     <>
       <div className={`${darkMode ? "dark" : ""}`}>
-        <NavBar
-          darkMode={darkMode}
-          toggleDarkMode={() => setDarkMode(!darkMode)}
-        />
+        {/* Mostrar NavBar solo si no estás en /panel-admin */}
+        {location.pathname !== "/panel-admin" && (
+          <NavBar
+            darkMode={darkMode}
+            toggleDarkMode={() => setDarkMode(!darkMode)}
+          />
+        )}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
@@ -33,6 +47,10 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/panel-admin" element={<Dashboard />} />
+          </Route>
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
     </>

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
+import generarHorariosDisponibles from "../utils/generarHorarios.js";
 import { createTurno } from "../services/turnos.js";
 
 const TurnosForm = () => {
@@ -10,6 +11,15 @@ const TurnosForm = () => {
     dia: "",
     hora: "",
   });
+
+  const [horariosDisponibles, setHorariosDisponibles] = useState([]);
+  useEffect(() => {
+    if (formData.dia) {
+      setHorariosDisponibles(
+        generarHorariosDisponibles("09:00", "19:00", formData.dia)
+      );
+    }
+  }, [formData.dia]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +39,8 @@ const TurnosForm = () => {
       dia: formData.dia,
       hora: formData.hora,
     };
+
+    console.log(newObject);
 
     await createTurno(newObject).then((res) => {
       alert(res.data.message);
@@ -65,6 +77,7 @@ const TurnosForm = () => {
             onChange={handleChange}
             className="w-full p-3 mt-1 border border-[#C5A880] bg-[#333333] text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#D64933] transition"
             required
+            autoComplete="off"
           />
         </div>
 
@@ -83,6 +96,7 @@ const TurnosForm = () => {
             onChange={handleChange}
             className="w-full p-3 mt-1 border border-[#C5A880] bg-[#333333] text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#D64933] transition"
             required
+            autoComplete="off"
           />
         </div>
 
@@ -101,6 +115,7 @@ const TurnosForm = () => {
             onChange={handleChange}
             className="w-full p-3 mt-1 border border-[#C5A880] bg-[#333333] text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#D64933] transition"
             required
+            autoComplete="off"
           />
         </div>
 
@@ -113,6 +128,7 @@ const TurnosForm = () => {
           </label>
           <input
             type="date"
+            min={new Date().toISOString().split("T")[0]}
             id="dia"
             name="dia"
             value={formData.dia}
@@ -129,15 +145,28 @@ const TurnosForm = () => {
           >
             Hora
           </label>
-          <input
-            type="time"
-            id="hora"
-            name="hora"
+          <select
+            name="hora" // Asegúrate de que el nombre coincida con el campo en el estado
             value={formData.hora}
-            onChange={handleChange}
-            className="w-full p-3 mt-1 border border-[#C5A880] bg-[#333333] text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#D64933] transition"
+            onChange={handleChange} // Vincula el evento onChange
             required
-          />
+            onInvalid={(e) =>
+              e.target.setCustomValidity(
+                "Por favor, selecciona un horario válido."
+              )
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
+            className="w-full p-3 mt-1 border border-[#C5A880] bg-[#333333] text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#D64933] transition"
+          >
+            <option value="" disabled>
+              Seleccione un horario
+            </option>
+            {horariosDisponibles.map((hora) => (
+              <option key={hora} value={hora}>
+                {hora}
+              </option>
+            ))}
+          </select>
         </div>
 
         <button

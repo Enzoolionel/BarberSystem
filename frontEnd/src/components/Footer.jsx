@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 
 import Button from "@components/Button";
 
-import logo from "@img/newLogo1.png";
-import instaIcon from "@icon/instaIcon.svg";
-import faceIcon from "@icon/faceIcon.svg";
-import twitterIcon from "@icon/twitterIcon.svg";
+import logo from "/img/newLogo1.png";
+import instaIcon from "/icon/instaIcon.svg";
+import faceIcon from "/icon/faceIcon.svg";
+import twitterIcon from "/icon/twitterIcon.svg";
 
 const Footer = () => {
   return (

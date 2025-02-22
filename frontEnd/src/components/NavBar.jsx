@@ -28,7 +28,9 @@ const NavBar = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <nav
-      className={`w-screen fixed z-50 top-0 left-0 right-0 py-4 transition-all duration-300 ${
+      className={`${
+        window.location.href === "panel-admin" ? "none" : ""
+      }  w-screen fixed z-50 top-0 left-0 right-0 py-4 transition-all duration-300 ${
         scrolling ? "bg-white dark:bg-gray-800 shadow-md" : "shadow-none"
       }`}
     >

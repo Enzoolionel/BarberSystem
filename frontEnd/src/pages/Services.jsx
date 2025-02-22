@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 import ServiceCard from "@components/ServiceCard";
 
-import icon1 from "@icon/icon1.png";
-import icon2 from "@icon/icon2.png";
-import icon3 from "@icon/icon3.png";
-import icon4 from "@icon/icon4.png";
-import icon5 from "@icon/icon5.png";
+import icon1 from "/icon/icon1.png";
+import icon2 from "/icon/icon2.png";
+import icon3 from "/icon/icon3.png";
+import icon4 from "/icon/icon4.png";
+import icon5 from "/icon/icon5.png";
 
 const services = [
   {

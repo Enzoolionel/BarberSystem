@@ -52,8 +52,26 @@ export const addTurno = async (req, res) => {
   }
 };
 
-export const getAllTurns = async (req, res) => {
-  const turns = await Turn.find({});
+// Función para obtener todos los turnos
 
-  res.json(turns);
+export const getAllTurns = async (req, res) => {
+  try {
+    if (req.user.role !== "admin") {
+      console.log(req.user.role);
+      return res
+        .status(403)
+        .json({ message: "Acceso denegado. No tienes permiso." });
+    }
+
+    const turns = await Turn.find({});
+
+    if (!turns.length) {
+      return res.status(404).json({ message: "No hay turnos disponibles." });
+    }
+
+    res.json({ success: true, data: turns });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener los turnos", error });
+  }
 };
