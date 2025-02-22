@@ -6,6 +6,7 @@ import { getAllTurno } from "../services/turnos.js";
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [turns, setTurns] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate(); // Para redirigir al login al hacer logout
 
   useEffect(() => {
@@ -14,7 +15,6 @@ const Dashboard = () => {
         const res = await getAllTurno();
 
         const data = res.data.data;
-        console.log(data);
 
         if (data) {
           setTurns(data);
@@ -44,10 +44,28 @@ const Dashboard = () => {
   };
 
   return (
-    <div className={`${darkMode ? "dark" : ""} h-max flex`}>
-      {/* Sidebar */}
-      <div className="bg-gray-800 text-white w-64 p-5 space-y-6">
+    <div
+      className={`${
+        darkMode ? "dark" : ""
+      } min-h-screen flex flex-col md:flex-row`}
+    >
+      {/* Navbar en móviles */}
+      <nav className="md:hidden bg-gray-800 text-white p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold">Admin Panel</h1>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="focus:outline-none"
+        >
+          {isOpen ? "✖" : "☰"}
+        </button>
+      </nav>
+
+      {/* Sidebar - Se oculta en móviles y se muestra con el menú */}
+      <div
+        className={`bg-gray-800 text-white w-64 p-5 space-y-6 absolute md:static top-0 left-0 h-screen md:h-auto transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50 md:flex md:flex-col`}
+      >
         <ul className="space-y-4">
           <li>
             <a href="#" className="hover:text-gray-400">
@@ -83,7 +101,7 @@ const Dashboard = () => {
         <h2 className="text-3xl font-semibold">Dashboard</h2>
 
         {/* Sección de estadísticas */}
-        <div className="mt-6 grid grid-cols-3 gap-6">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
             <h3 className="text-xl font-semibold">Turnos Pendientes</h3>
             <p className="text-2xl font-bold">{turns.length}</p>
@@ -94,7 +112,7 @@ const Dashboard = () => {
         <div className="mt-8">
           <h3 className="text-2xl font-semibold mb-4">Turnos</h3>
           {turns.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {turns.map((turn) => (
                 <div
                   key={turn._id}
