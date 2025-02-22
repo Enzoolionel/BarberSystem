@@ -15,7 +15,7 @@ import { connectDB } from "./conectDB.js";
 import dashboardRouter from "./routes/dashboard.routes.js";
 
 const app = express();
-const { PORT } = process.env;
+const { PORT, JWT_SECRET } = process.env;
 
 // Configura __dirname para ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -26,8 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    // origin: "https://barbersystem.onrender.com", // Reemplaza con el dominio de tu aplicación
+    origin: "https://barbersystem.onrender.com", // Reemplaza con el dominio de tu aplicación
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -41,7 +40,7 @@ connectDB();
 
 app.use(
   session({
-    secret: "secreto",
+    secret: JWT_SECRET,
     resave: false,
     saveUninitialized: true,
     rolling: false, // No renueva la sesión automáticamente
