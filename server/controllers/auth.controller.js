@@ -33,7 +33,7 @@ export const login = async (req, res) => {
     generateToken(res, user);
 
     console.log("Bienvenido: " + user);
-    res.json({ message: "bienvenido", user }).redirect("/panel-admin");
+    res.json({ message: "bienvenido", user });
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor", error });
   }
