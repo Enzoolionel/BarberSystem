@@ -46,7 +46,6 @@ app.use(
     rolling: false, // No renueva la sesión automáticamente
     unset: "destroy", // Elimina la sesión cuando expira
     cookie: {
-      domain: "https://barbersystem.onrender.com",
       httpOnly: true, // Evita que el token sea accedido por JavaScript
       secure: true, // true en producción con HTTPS
       maxAge: 30 * 60 * 1000, // Expira en 30 minutos
