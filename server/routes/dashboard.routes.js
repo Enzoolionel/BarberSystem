@@ -5,6 +5,6 @@ import sessionMiddleware from "../middlewares/session.middlewares.js";
 
 const dashboardRouter = Router();
 
-dashboardRouter.get("/panel-admin", sessionMiddleware, dashboardController);
+//dashboardRouter.get("/panel-admin", sessionMiddleware, dashboardController);
 
 export default dashboardRouter;
