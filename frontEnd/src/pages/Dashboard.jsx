@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { logout } from "../services/users.js";
-import { getAllTurno } from "../services/turnos.js";
+import { deleteTurno, getAllTurno } from "../services/turnos.js";
+
+import TurnoCard from "../components/TurnoCard";
+import UpdateUserModal from "../components/UpdateModal.jsx";
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [turns, setTurns] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [datoUpdated, setDatoUpdated] = useState({});
   const navigate = useNavigate(); // Para redirigir al login al hacer logout
 
   useEffect(() => {
     const getTurnos = async () => {
       try {
         const res = await getAllTurno();
-
         const data = res.data.data;
-
         if (data) {
           setTurns(data);
         }
@@ -31,7 +34,6 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       const response = await logout();
-
       if (response.success) {
         navigate("/login"); // Redirigir al login
         window.location.reload();
@@ -43,13 +45,29 @@ const Dashboard = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteTurno(id);
+      console.log("Turno eliminado");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error eliminando el turno", error);
+    }
+  };
+
+  const handleEdit = (id) => {
+    setModalOpen(true); // Abrir modal
+    const turno = turns.find((e) => e._id === id); // Usar find en lugar de filter para obtener el objeto directamente
+    setDatoUpdated(turno); // Setear los datos del turno en el estado
+  };
+
   return (
     <div
       className={`${
         darkMode ? "dark" : ""
       } min-h-screen flex flex-col md:flex-row`}
     >
-      {/* Navbar en móviles */}
+      {/* Navbar y Sidebar */}
       <nav className="md:hidden bg-gray-800 text-white p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold">Admin Panel</h1>
         <button
@@ -59,8 +77,6 @@ const Dashboard = () => {
           {isOpen ? "✖" : "☰"}
         </button>
       </nav>
-
-      {/* Sidebar - Se oculta en móviles y se muestra con el menú */}
       <div
         className={`bg-gray-800 text-white w-64 p-5 space-y-6 absolute md:static top-0 left-0 h-screen md:h-auto transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -97,7 +113,7 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6 bg-gray-100 dark:bg-gray-900">
+      <div className="flex-1 p-6 text-gray-100 dark:bg-gray-900">
         <h2 className="text-3xl font-semibold">Dashboard</h2>
 
         {/* Sección de estadísticas */}
@@ -113,33 +129,27 @@ const Dashboard = () => {
           <h3 className="text-2xl font-semibold mb-4">Turnos</h3>
           {turns.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {turns.map((turn) => (
-                <div
-                  key={turn._id}
-                  className="bg-white p-4 rounded-lg shadow-md dark:bg-gray-800"
-                >
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                    {turn.cliente}
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    📅 <strong>Día:</strong> {turn.dia}
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    ⏰ <strong>Hora:</strong> {turn.hora}
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    ✉️ <strong>Email:</strong> {turn.email}
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    📞 <strong>Teléfono:</strong> {turn.telefono}
-                  </p>
-                </div>
+              {turns.map((turn, i) => (
+                <TurnoCard
+                  turn={turn}
+                  estado={turn.estado}
+                  key={i}
+                  onDelete={() => handleDelete(turn._id)}
+                  onEdit={() => handleEdit(turn._id)}
+                />
               ))}
             </div>
           ) : (
             <p className="mt-2 text-gray-600 dark:text-gray-400">
               No hay turnos disponibles.
             </p>
+          )}
+
+          {modalOpen && (
+            <UpdateUserModal
+              onClose={() => setModalOpen(false)}
+              user={datoUpdated} // Pasa los datos al modal
+            />
           )}
         </div>
       </div>

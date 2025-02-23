@@ -27,13 +27,22 @@ const { EMAIL_USER } = process.env;
 export const addTurno = async (req, res) => {
   const { dia, hora, cliente, email, telefono } = req.body;
 
-  const text = `Hola ${cliente} Su turno es el dia ${dia} a las ${hora}hs Muchas gracias`;
-  const subject = "Turno Barberia";
+  const text = `Hola ${cliente} 🧑 Tu turno es el dia ${dia} a las ${hora}hs ⌚ Muchas gracias.
+    Puede editar o eliminar este turno ingresando a: http:localhost:3000/login
+  `;
+  const subject = "💈 Turno The Razor 💈";
 
   console.log(req.body);
 
   try {
-    const turn = new Turn({ dia, hora, cliente, email, telefono });
+    const turn = new Turn({
+      dia,
+      hora,
+      cliente,
+      email,
+      telefono,
+      estado: "Pendiente",
+    });
     await turn.save();
 
     await transporter
@@ -66,12 +75,49 @@ export const getAllTurns = async (req, res) => {
     const turns = await Turn.find({});
 
     if (!turns.length) {
-      return res.status(404).json({ message: "No hay turnos disponibles." });
+      return res.status(200).json({ message: "No hay turnos disponibles." });
     }
 
     res.json({ success: true, data: turns });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener los turnos", error });
+  }
+};
+
+export const updateTurno = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+
+  try {
+    const datoUpdated = await Turn.findByIdAndUpdate(id, body, { new: true });
+    if (!datoUpdated) {
+      return res.status(404).json({ message: "No se encontró el turno" });
+    }
+
+    res.status(200).json({ message: "Turno actualizado", turno: datoUpdated });
+  } catch (error) {
+    res.status(500).json({ message: "Error al actualizar el turno", error });
+  }
+};
+
+export const deleteTurno = async (req, res) => {
+  try {
+    console.log("Usuario en sesión:", req.session.user); // Verifica si llega el usuario
+
+    if (!req.session.user) {
+      return res.status(401).json({ message: "No autorizado" });
+    }
+
+    const { id } = req.params;
+    const deletedTurno = await Turn.findByIdAndDelete(id);
+
+    if (!deletedTurno) {
+      return res.status(404).json({ message: "Turno no encontrado" });
+    }
+
+    res.status(200).json({ message: "Turno eliminado correctamente" });
+  } catch (error) {
+    res.status(500).json({ message: "Error al eliminar el turno", error });
   }
 };

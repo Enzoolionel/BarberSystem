@@ -81,7 +81,7 @@ const Working = () => {
             <img
               src={item.image}
               alt={item.alt}
-              className="h-[350px]  w-screen md:w-full md:h-full md:object-cover md:object-center rounded-lg "
+              className="h-[380px] w-screen md:w-full md:h-full md:object-cover md:object-center rounded-lg "
             />
           </motion.div>
         ))}
@@ -141,7 +141,7 @@ const Working = () => {
           <img
             src={items[3].image}
             alt={items[3].alt}
-            className=" right-8 top-6 md:top-0 md:right-0 relative md:block h-64 md:h-80 rounded-lg col-start-1 col-end-3 row-start-2"
+            className="m-auto right-5 md:top-0 md:right-0 relative md:block h-64 md:h-80 rounded-lg col-start-1 col-end-3 row-start-2"
           />
         </motion.div>
 
@@ -151,7 +151,7 @@ const Working = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           viewport={{ once: false, amount: 0.3 }}
-          className="w-[300px] relative right-24 md:right-0 md:block md:w-full bg-white dark:bg-gray-900 p-4 md:p-10 rounded-lg shadow-lg flex flex-col justify-center col-start-3 col-end-7 row-start-3 md:row-start-2"
+          className="w-[340px] relative right-[110px] md:right-0 md:block md:w-full bg-white dark:bg-gray-900 p-4 md:p-10 rounded-lg shadow-lg flex flex-col justify-center col-start-3 col-end-7 row-start-3 md:row-start-2"
         >
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
             Horas de trabajo

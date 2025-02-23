@@ -8,9 +8,13 @@ const ProtectedRoute = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/verify", {
-          withCredentials: true, // ✅ Enviar cookies al backend
-        });
+        const response = await axios.get(
+          "http://localhost:3000/api/verify",
+          // "https://barbersystem.onrender.com/api/verify",
+          {
+            withCredentials: true, // ✅ Enviar cookies al backend
+          }
+        );
 
         // ✅ Validamos la respuesta correctamente
         setIsAuthenticated(response.data.authenticated ?? false);

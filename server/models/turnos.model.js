@@ -6,6 +6,7 @@ const turnSchema = new mongoose.Schema({
   dia: String,
   hora: String,
   cliente: String,
+  estado: String,
 });
 
 export const Turn = mongoose.model("Turn", turnSchema, "turnos");

@@ -26,8 +26,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://barbersystem.onrender.com", // Reemplaza con el dominio de tu aplicación
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: "http://localhost:5173",
+
+    //origin: "https://barbersystem.onrender.com", // Reemplaza con el dominio de tu aplicación
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
 );
@@ -47,7 +49,8 @@ app.use(
     unset: "destroy", // Elimina la sesión cuando expira
     cookie: {
       httpOnly: true, // Evita que el token sea accedido por JavaScript
-      secure: true, // true en producción con HTTPS
+      secure: false, // true en producción con HTTPS
+      sameSite: "lax",
       maxAge: 30 * 60 * 1000, // Expira en 30 minutos
     },
   })

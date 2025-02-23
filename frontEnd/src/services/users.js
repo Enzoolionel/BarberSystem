@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://barbersystem.onrender.com/api";
+const baseUrl = "http://localhost:3000/api"; //"https://barbersystem.onrender.com/api";
 
 export const login = (object) => {
   return axios.post(`${baseUrl}/login`, object, { withCredentials: true });
