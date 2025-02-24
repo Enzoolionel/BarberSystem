@@ -103,9 +103,9 @@ export const updateTurno = async (req, res) => {
 
 export const deleteTurno = async (req, res) => {
   try {
-    console.log("Usuario en sesión:", req.session.user); // Verifica si llega el usuario
+    console.log(req.cookies.token);
 
-    if (!req.session.user) {
+    if (!req.cookies.token) {
       return res.status(401).json({ message: "No autorizado" });
     }
 
